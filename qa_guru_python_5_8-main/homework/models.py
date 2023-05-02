@@ -74,6 +74,7 @@ class Cart:
 
     def clear(self):
         self.products.clear()
+        print("Корзина пуста")
 
     def get_total_price(self) -> float:
         total_price = 0
