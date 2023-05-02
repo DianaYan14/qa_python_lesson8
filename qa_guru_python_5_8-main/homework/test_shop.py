@@ -62,6 +62,10 @@ class TestCart:
         # remove_count не передан
         cart.remove_product(product)
         assert len(cart.products) == 0
+        # добавить проверку на удаление такого же количества товара, которое находиться в корзине
+        cart.add_product(product, 300)
+        cart.remove_product(product, 300)
+        assert len(cart.products) == 0
 
     # проверка на метод clear
     def test_clear_cart(self, product, cart):
@@ -80,10 +84,10 @@ class TestCart:
         cart.add_product(product, 100)
         cart.add_product(second_product, 10)
         cart.buy()
-        len(cart.products) == 0
+        assert len(cart.products) == 0
 
     def test_buy_incorrect_quantity(self, product, cart):
         # купить больше, чем положили в корзину
         with pytest.raises(ValueError):
-            cart.add_product(product, 1000)
-            product.buy(1001)
+            cart.add_product(product, 1001)
+            cart.buy()
